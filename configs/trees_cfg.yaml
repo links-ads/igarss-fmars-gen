@@ -1,0 +1,19 @@
+models:
+  df:
+    bs: 16
+    size: 600
+    patch_overlap: 0.25
+    device:
+      - 0 #to indicate cuda:0 input [int(0)], to not specify use 'auto'
+    box_threshold: 0.1
+
+  gd:
+    size: 1024
+    stride: 1024
+    box_threshold: 0.12
+
+detection:
+  trees:
+    nms_threshold: 0.5
+    min_ratio_GD_boxes_edges: 0.5
+    max_area_boxes_mt2: 7000 # best in range 6000-8000

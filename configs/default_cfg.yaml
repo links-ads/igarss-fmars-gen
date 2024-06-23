@@ -1,0 +1,56 @@
+event:
+  ix: None
+  when: "pre"
+
+models:
+  gd:
+    bs: 1
+    size: 600
+    stride: 400
+    device: "cuda:0"
+    root_path: "./models/GDINO"
+    config_file_path: "./models/GDINO/configs/GroundingDINO_SwinT_OGC.py"
+    weight_path: "./models/GDINO/weights/groundingdino_swint_ogc.pth"
+    text_prompt: "bush"
+    box_threshold: 0.15
+    text_threshold: 0.30
+
+  df:
+    bs: 16
+    size: 600
+    patch_overlap: 0.25
+    device:
+      - 0 #to indicate cuda:0 input [int(0)], to not specify use 'auto'
+    box_threshold: 0.1
+
+  esam:
+    bs: 1
+    num_parall_queries: 200
+    size: 1024
+    stride: 768
+    device: "cuda:0"
+    root_path: "./models/EfficientSAM"
+  
+detection:
+  trees:
+    use_GD: true
+    use_DF: false
+    nms_threshold: 0.5
+    min_ratio_GD_boxes_edges: 0.5
+    max_area_boxes_mt2: 6000
+    perc_reduce_tree_boxes: 0
+
+  buildings:
+    ext_mt_build_box: 0
+
+segmentation:
+  general:
+    clean_mask: true
+    rmv_holes_area_th: 80
+    rmv_small_obj_area_th: 80
+
+  roads:
+    road_width_mt: 5
+
+output:
+  out_dir_root: "./output"
