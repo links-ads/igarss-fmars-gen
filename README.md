@@ -59,10 +59,21 @@ python src/maxarseg/scripts/downloadMaxar.py
 ```shell
 python src/maxarseg/scripts/downloadRoads.py
 ```
-## Installation and Usage
+## Usage
 
-> **Warning:** This section is under construction.
-
+To run the automatic labelling process on a whole event:
+```shell
+python -B -O -m maxarseg.main_seg_event_w_config --out_dir_root <path/to/output/directory> \
+        --config "./configs/trees_cfg.yaml" \
+        --event_ix 0
+```
+To label one-tenth of the event (partitioned processing):
+```shell
+python -B -O -m maxarseg.main_seg_event_w_config_partitioned --out_dir_root <path/to/output/directory> \
+        --config "./configs/trees_cfg.yaml" \
+        --event_ix 0.1
+```
+Replace 0.1 with values from x.0 to x.9 to process different partitions.
 ## Acknowledgements
 
 FMARS leverages several open-source projects. We extend our gratitude to the authors of the following tools for making their software publicly available:
