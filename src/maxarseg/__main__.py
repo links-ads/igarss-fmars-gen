@@ -29,12 +29,19 @@ def balance_groups(nums, k):
 def main(): 
     parser = argparse.ArgumentParser(description='Segment Maxar Tiles')
     parser.add_argument('--config', required=True, type = str, help='Path to the custom configuration file')
-    parser.add_argument('--event_ix', type = float, help='Index of the event in the list events_names')
-    parser.add_argument('--out_dir_root', help='output directory root')
+    parser.add_argument('--event_ix', type = str, help='Index of the event in the list events_names')
+    parser.add_argument('--out_dir_root', default = "output", help='output directory root')
 
     args = parser.parse_args()
     
     cfg = Config(config_path = args.config)
+    
+    if '.' in args.event_ix:
+        args.event_ix = float(args.event_ix)
+        do_whole = False
+    else:
+        args.event_ix = int(args.event_ix)
+        do_whole = True
     
     if args.event_ix is not None:
         cfg.set('event/ix', args.event_ix)
@@ -49,7 +56,7 @@ def main():
         cfg.set('models/df/device', 'cpu')
         cfg.set('models/esam/device', 'cpu')
     
-    if '.' not in str(cfg.get('event/ix')):
+    if do_whole:
         print(cfg._data)
         events_names = names.get_all_events()    
         event = holders.Event(events_names[cfg.get('event/ix')], cfg = cfg)
