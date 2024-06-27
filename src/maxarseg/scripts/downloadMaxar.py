@@ -56,7 +56,7 @@ def get_pre_post_gdf_local(collection_id, event2date = event2date, local_gdf = T
 
     return pre_gdf, post_gdf
 
-def download_event(collection_id, out_dir_root = "/nfs/projects/overwatch/maxar-segmentation/maxar-open-data/"):
+def download_event(collection_id, out_dir_root = "../data/maxar-open-data/"):
     
     pre_gdf, post_gdf = get_pre_post_gdf_local(collection_id)
     if pre_gdf is None or post_gdf is None:
@@ -69,7 +69,7 @@ def download_event(collection_id, out_dir_root = "/nfs/projects/overwatch/maxar-
 def main():
     pareser = argparse.ArgumentParser(description='Download Maxar images')
     pareser.add_argument('--c_id', help='single or list of collection id you want to download')
-    pareser.add_argument('--out_dir', default = "/nfs/projects/overwatch/maxar-segmentation/maxar-open-data/", help='output directory')
+    pareser.add_argument('--out_dir', default = "../data/maxar-open-data/", help='output directory')
 
     args = pareser.parse_args()
 

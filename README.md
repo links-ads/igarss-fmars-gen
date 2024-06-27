@@ -44,7 +44,7 @@ cd ../../..
 ```
 
 - **EfficientSAM**:
-  Download from [this link](https://github.com/yformer/EfficientSAM/blob/main/weights/efficient_sam_vitt.pt) and place them in `models/efficientSAM/weights/`.
+  Download the checkpoint from [this link](https://github.com/yformer/EfficientSAM/blob/main/weights/efficient_sam_vitt.pt) and place it in `models/efficientSAM/weights/`.
 
 ### Data Acquisition
 
