@@ -593,7 +593,7 @@ class Event:
     def __init__(self,
                 name,
                 cfg,
-                maxar_root = './data/maxar-segmentation/maxar-open-data',
+                maxar_root = './data/maxar-open-data',
                 maxar_metadata_path = './metadata/from_github_maxar_metadata/datasets',
                 region = 'infer'):
         #Configs
