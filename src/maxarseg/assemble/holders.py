@@ -105,16 +105,10 @@ class Mosaic:
         self.build_gdf = gen_gdf.qk_building_gdf(qk_hits, csv_path = self.event.buildings_ds_links_path)
 
         if len(self.build_gdf) == 0: #here use google buildings
-            try:
-                self.build_gdf = gen_gdf.google_building_gdf(event_name=self.event.name, bbox=self.bbox)
-                if len(self.build_gdf) == 0:
-                    self.build_gdf = None
-                    self.proj_build_gdf = None
-                    print('No buildings found for this mosaic either in Ms Buildings or in Google Open Buildings')
-                    return False
-            except Exception as e:
-                print('No buildings found for this mosaic either in Ms Buildings or in Google Open Buildings')
-                return False
+            self.build_gdf = None
+            self.proj_build_gdf = None
+            print('No buildings found for this mosaic')
+            return False
                 
         self.proj_build_gdf = self.build_gdf.to_crs(self.crs)
         self.sindex_proj_build_gdf = self.proj_build_gdf.sindex
@@ -599,7 +593,7 @@ class Event:
     def __init__(self,
                 name,
                 cfg,
-                maxar_root = '/nfs/projects/overwatch/maxar-segmentation/maxar-open-data',
+                maxar_root = './data/maxar-segmentation/maxar-open-data',
                 maxar_metadata_path = './metadata/from_github_maxar_metadata/datasets',
                 region = 'infer'):
         #Configs
@@ -656,7 +650,7 @@ class Event:
         region_road_gdf = gen_gdf.get_region_road_gdf(self.region_name)
         self.road_gdf = filter.filter_gdf_w_bbox(region_road_gdf, self.bbox)
     
-    def fast_set_road_gdf(self, roads_root = '/nfs/projects/overwatch/maxar-segmentation/microsoft-roads'):
+    def fast_set_road_gdf(self, roads_root = './data/microsoft-roads'):
         """
         Get a gdf containing the roads of a region.
         Input:

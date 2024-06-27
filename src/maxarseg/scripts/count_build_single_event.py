@@ -30,7 +30,7 @@ def filter_gdf_vs_aois_gdf(proj_gdf, aois_gdf):
 class Event_light:
     def __init__(self,
                 name,
-                maxar_root = '/nfs/projects/overwatch/maxar-segmentation/maxar-open-data',
+                maxar_root = './data/maxar-open-data',
                 maxar_metadata_path = './metadata/from_github_maxar_metadata/datasets',
                 region = 'infer'):
 

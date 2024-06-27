@@ -19,11 +19,11 @@ def get_region_name(event_name, metadata_root = './metadata'):
     return df[df['event_id'] == event_name]['region'].values[0]
 
 
-def get_all_events(data_root = '/nfs/projects/overwatch/maxar-segmentation/maxar-open-data'):
+def get_all_events(data_root = './data/maxar-open-data'):
     """
     Get all the events name in the data_root folder.
     Input:
-        data_root: Example: '/nfs/projects/overwatch/maxar-segmentation/maxar-open-data'
+        data_root: Example: './data/maxar-open-data'
     Output:
         all_events: List of events.
     """
@@ -36,12 +36,12 @@ def get_all_events(data_root = '/nfs/projects/overwatch/maxar-segmentation/maxar
     return sorted(list(all_events))
 
 
-def get_mosaics_names(event_name, data_root = '/nfs/projects/overwatch/maxar-segmentation/maxar-open-data', when = None):
+def get_mosaics_names(event_name, data_root = './data/maxar-open-data', when = None):
     """
     Get all the mosaic names for an event.
     Input:
         event_name: Example: 'Gambia-flooding-8-11-2022'
-        data_root: Example: '/nfs/projects/overwatch/maxar-segmentation/maxar-open-data'
+        data_root: Example: './data/maxar-open-data'
         when: 'pre' or 'post'. Default matches both
     Output:
         all_mosaics: List of mosaic names. Example: ['104001007A565700', '104001007A565800']

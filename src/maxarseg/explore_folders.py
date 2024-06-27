@@ -1,6 +1,6 @@
 import os
 
-def create_pre_post_diz_set(event_id, root = '/nfs/projects/overwatch/maxar-segmentation/maxar-open-data/'):
+def create_pre_post_diz_set(event_id, root = './data/maxar-open-data/'):
     """
     Create a dictionary of sets for pre and post folders.
     The key is the mosaic name and the value is a set containing
@@ -55,7 +55,7 @@ def subtraction_between_diz(matching, pre_diz, post_diz):
     non_matching = tmp
     return non_matching
 
-def check_matching_pre_post(event_id, root = '/nfs/projects/overwatch/maxar-segmentation/maxar-open-data/', verbose=True):
+def check_matching_pre_post(event_id, root = './data/maxar-open-data/', verbose=True):
     """
     Params:
     event_id example: 'Gambia-flooding-8-11-2022'
@@ -113,7 +113,7 @@ def count_tif_files(path):
                 count += 1
     return count
 
-def compute_stats_on_event(event_id, root = '/nfs/projects/overwatch/maxar-segmentation/maxar-open-data/'):
+def compute_stats_on_event(event_id, root = './data/maxar-open-data/'):
     """
     Params:
     event_id: Example: "Gambia-flooding-8-11-2022"

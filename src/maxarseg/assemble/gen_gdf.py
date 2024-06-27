@@ -78,7 +78,7 @@ def google_building_gdf(event_name, bbox):
     Returns:
     - gdf_filtered (GeoDataFrame): A GeoDataFrame containing the filtered Google building data.
     """ 
-    root = '/nfs/projects/overwatch/maxar-segmentation/google-open-buildings'
+    root = './data/maxar-segmentation/google-open-buildings'
     f_name = 'open_buildings_v3_'+ event_name + '.csv'
     file_path = Path(root) / f_name
     df = pd.read_csv(file_path) #TODO: leggere solo le colonne necessarie e filtrare magari su confidence boxes
@@ -87,7 +87,7 @@ def google_building_gdf(event_name, bbox):
     gdf_filtered = assemble.filter.filter_gdf_w_bbox(gdf, bbox)
     return gdf_filtered
 
-def get_region_road_gdf(region_name, roads_root = '/nfs/projects/overwatch/maxar-segmentation/microsoft-roads'):
+def get_region_road_gdf(region_name, roads_root = './data/maxar-segmentation/microsoft-roads'):
     #TODO: cercare di velocizzare la lettura dei dati delle strade
     """
     Get a gdf containing the roads of a region.

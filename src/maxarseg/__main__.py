@@ -50,32 +50,38 @@ def main():
         cfg.set('models/esam/device', 'cpu')
     
     if '.' not in str(cfg.get('event/ix')):
-        raise ValueError("Event ix should contain a sub partition. E.g. event/ix = 4.1")
-    
-    mos_partition = int(str(cfg.get('event/ix')).split('.')[-1])
-    event_ix = int(str(cfg.get('event/ix')).split('.')[0])
-    print(cfg._data)
-    events_names = names.get_all_events()    
-    event = holders.Event(events_names[event_ix], cfg = cfg)
-    print("Selected Event: ", event.name)
-    
-    all_mosaics_names = event.all_mosaics_names
-    all_mosaics_names.sort()
-    
-    #There always be 10 partition x.0 to x.9
-    mos_ix_s = math.floor(len(all_mosaics_names)/10) * mos_partition
-    if mos_partition == 9:
-        mos_ix_e = len(all_mosaics_names)
-    else:
-        mos_ix_e = math.floor(len(all_mosaics_names)/10) * (mos_partition + 1)
+        print(cfg._data)
+        events_names = names.get_all_events()    
+        event = holders.Event(events_names[cfg.get('event/ix')], cfg = cfg)
+        print("Selected Event: ", event.name)
         
-    mos_names = all_mosaics_names[mos_ix_s:mos_ix_e]
-    
-    part_num_tiles = sum([event.mosaics[k].tiles_num for k in mos_names])
-    print()
-    print(f'This partition will segment {len(mos_names)}/{len(event.mosaics)} mosaics. {part_num_tiles}/{event.total_tiles} imgs in total')
-    print()
-    event.seg_mos_by_keys(keys = mos_names, out_dir_root=cfg.get('output/out_dir_root'))
+        event.seg_all_mosaics(out_dir_root=cfg.get('output/out_dir_root'))
+
+    else:
+        mos_partition = int(str(cfg.get('event/ix')).split('.')[-1])
+        event_ix = int(str(cfg.get('event/ix')).split('.')[0])
+        print(cfg._data)
+        events_names = names.get_all_events()    
+        event = holders.Event(events_names[event_ix], cfg = cfg)
+        print("Selected Event: ", event.name)
+        
+        all_mosaics_names = event.all_mosaics_names
+        all_mosaics_names.sort()
+        
+        #There always be 10 partition x.0 to x.9
+        mos_ix_s = math.floor(len(all_mosaics_names)/10) * mos_partition
+        if mos_partition == 9:
+            mos_ix_e = len(all_mosaics_names)
+        else:
+            mos_ix_e = math.floor(len(all_mosaics_names)/10) * (mos_partition + 1)
+            
+        mos_names = all_mosaics_names[mos_ix_s:mos_ix_e]
+        
+        part_num_tiles = sum([event.mosaics[k].tiles_num for k in mos_names])
+        print()
+        print(f'This partition will segment {len(mos_names)}/{len(event.mosaics)} mosaics. {part_num_tiles}/{event.total_tiles} imgs in total')
+        print()
+        event.seg_mos_by_keys(keys = mos_names, out_dir_root=cfg.get('output/out_dir_root'))
 
 if __name__ == "__main__":
     main()
